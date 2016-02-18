@@ -122,7 +122,7 @@
     //[SVProgressHUD showWithStatus:@"请稍后..."];
     NHItem *item = [_sources objectAtIndex:indexPath.row];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:@"13023622337" forKey:@"phone"];
+    [params setObject:@"15958199883" forKey:@"phone"];
     [params setObject:@"123456" forKey:@"pwd"];
     if ([item.method isEqualToString:@"GET"]) {
         [[NHAFEngine share] GET:item.info parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {

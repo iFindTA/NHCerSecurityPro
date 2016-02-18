@@ -17,10 +17,8 @@
 @property (nonatomic, strong) NSString *token;
 @end
 static NHAFEngine *instance = nil;
-static NSString *netHost = @"https://api.gongshidai.com/cj_v1";
-static NSString *logHost = @"https://licai.gongshidai.com/v3";
-static NSString *upload  = @"http://mist.gongshidai.com";
 static NSString *domain  = @"www.baidu.com";
+static NSString *logHost = @"https://ack.gongshidai.com/v1";
 @implementation NHAFEngine
 
 + (NHAFEngine *)share{
@@ -32,7 +30,7 @@ static NSString *domain  = @"www.baidu.com";
             //AFJSONRequestSerializer *request_serial = [AFJSONRequestSerializer serializer];
             AFHTTPRequestSerializer *request_serial = [AFHTTPRequestSerializer serializer];
             request_serial.timeoutInterval = 60.f;
-            [request_serial setValue:@"iphone" forHTTPHeaderField:@"client"];
+            [request_serial setValue:@"iphone" forHTTPHeaderField:@"CLIENT"];
             [request_serial setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
             //multipart/form-data
             //[request_serial setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
@@ -40,6 +38,7 @@ static NSString *domain  = @"www.baidu.com";
             instance.requestSerializer = request_serial;
             //set response serializer
             AFJSONResponseSerializer *response_serail = [AFJSONResponseSerializer serializer];
+//            response_serail.acceptableContentTypes = [response_serail.acceptableContentTypes setByAddingObject:@"text/html"];
             instance.responseSerializer = response_serail;
             //set security policy
             NSString *cerFilePath = [[NSBundle mainBundle] pathForResource:@"cert" ofType:@"der"];
@@ -47,8 +46,7 @@ static NSString *domain  = @"www.baidu.com";
             AFSecurityPolicy *t_policy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
             [t_policy setAllowInvalidCertificates:true];
             [t_policy setValidatesDomainName:false];
-            [t_policy setValidatesCertificateChain:false];
-            [t_policy setPinnedCertificates:@[CAData]];
+            [t_policy setPinnedCertificates:[NSSet setWithObjects:CAData, nil]];
             instance.securityPolicy = t_policy;
         }
     });
@@ -78,9 +76,9 @@ static NSString *domain  = @"www.baidu.com";
     NSArray *operations = [[self operationQueue] operations];
     NSUInteger count = [operations count];
     if (operations && count) {
-        for (NSOperation *operator in operations) {
-            AFHTTPRequestOperation *requestOperation = (AFHTTPRequestOperation *)operator;
-            [requestOperation cancel];
+        for (id operator in operations) {
+            NSLog(@"operation class :%@",NSStringFromClass([operator class]));
+            
         }
     }
 }
@@ -90,16 +88,16 @@ static NSString *domain  = @"www.baidu.com";
     NSUInteger count = [operations count];
     if (operations && count) {
         for (NSOperation *operator in operations) {
-            AFHTTPRequestOperation *requestOperation = (AFHTTPRequestOperation *)operator;
-            NSURLRequest *request = [requestOperation request];
-            NSURL *url = [request URL];
-            NSString *urlString = [url absoluteString];
-            NSString *urlPath = [url path];
-            if ([urlPath isEqualToString:path]
-                || [urlString rangeOfString:path].location != NSNotFound) {
-                [requestOperation cancel];
-                NSLog(@"request path :%@ canceld!",url.path);
-            }
+//            AFHTTPRequestOperation *requestOperation = (AFHTTPRequestOperation *)operator;
+//            NSURLRequest *request = [requestOperation request];
+//            NSURL *url = [request URL];
+//            NSString *urlString = [url absoluteString];
+//            NSString *urlPath = [url path];
+//            if ([urlPath isEqualToString:path]
+//                || [urlString rangeOfString:path].location != NSNotFound) {
+//                [requestOperation cancel];
+//                NSLog(@"request path :%@ canceld!",url.path);
+//            }
         }
     }
 }
@@ -142,9 +140,14 @@ static NSString *domain  = @"www.baidu.com";
     NSLog(@"request params:%@",parameters);
     //return [super POST:URLString parameters:parameters success:success failure:failure];
     NSURLSessionDataTask *task = [super POST:URLString parameters:parameters success:^(NSURLSessionDataTask *task, id response){
-        
+        int code = [[response objectForKey:@"code"] intValue];
+        if (code == 0) {
+            if (success) {
+                success(task,response);
+            }
+        }
     } failure:^(NSURLSessionDataTask *task, NSError *err){
-        
+        failure(task,err);
     }];
     
     return task;
@@ -189,6 +192,8 @@ static NSString *domain  = @"www.baidu.com";
         [SVProgressHUD dismiss];
         failure(task,error);
     }];
+    
+//    [self cancelAllRequest];
 }
 
 - (void)POST:(NSString *)path parameters:(id)parameters vcr:(UIViewController *)vcr view:(UIView *)view success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)(NSURLSessionDataTask *, NSError *))failure{
