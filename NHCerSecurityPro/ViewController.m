@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "NHAFEngine.h"
 #import "SVProgressHUD.h"
+#import "NHCipherStrength.h"
 
 #define SV_APP_EXTENSIONS
 
@@ -124,6 +125,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:@"15958199883" forKey:@"phone"];
     [params setObject:@"123456" forKey:@"pwd"];
+    NSString *password ;
     if ([item.method isEqualToString:@"GET"]) {
         [[NHAFEngine share] GET:item.info parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
             NSLog(@"responseObject:%@",responseObject);
@@ -133,6 +135,9 @@
             NSLog(@"error occured:%@",error.localizedDescription);
             [SVProgressHUD dismiss];
         }];
+        
+        password = @"123456";
+        
     }else if ([item.method isEqualToString:@"POST"]){
         [[NHAFEngine share] POST:item.info parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
             NSString *ret = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONReadingMutableLeaves|NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
@@ -141,6 +146,8 @@
             NSLog(@"error occured:%@",error.localizedDescription);
             [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         }];
+        
+        password = @"410752";
     }else if ([item.method isEqualToString:@"PUT"]){
         NSLog(@"start request !");
 //        [[NHAFEngine share] POST:item.info parameters:params vcr:self success:^(NSURLSessionDataTask *task, id responseObj) {
@@ -160,6 +167,8 @@
             NSLog(@"error occured:%@",error.localizedDescription);
             //[SVProgressHUD showErrorWithStatus:error.localizedDescription];
         }];
+        
+        password = @"62562wiu];/.,HJAu";
     }else if ([item.method isEqualToString:@"Upload"]){
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"t_default_icon@2x" ofType:@"png"];
         UIImage *image = [UIImage imageWithContentsOfFile:filePath];
@@ -172,7 +181,12 @@
             NSLog(@"error occured:%@",error.localizedDescription);
             [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         }];
+        
+        password = @"410626nanhujiaju";
     }
+    
+    int score = NHCipherUtil->score_cipherChar([password UTF8String]);
+    NSLog(@"score:%zd",score);
 }
 
 - (void)didReceiveMemoryWarning {
