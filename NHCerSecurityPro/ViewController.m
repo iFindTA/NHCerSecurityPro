@@ -76,6 +76,9 @@
      */
     
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
+    
+    NSString *info = NHCipherUtil->password_class([self class]);
+    NSLog(@"info:%@",info);
 }
 
 #pragma mark - tableView data&delegate

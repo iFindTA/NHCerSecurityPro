@@ -7,6 +7,7 @@
 //
 
 #import "NHCipherStrength.h"
+#import <objc/runtime.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/param.h>
@@ -19,11 +20,16 @@ static NHCipherStrength *instance = nil;
 @interface NHCipherStrength ()
 
 - (int)score_passphrase:(const char *)passphrase;
+- (NSString *)password_class:(Class)aClass;
 
 @end
 
 static int _score_passphrase(const char *passphrase) {
     return [instance score_passphrase:passphrase];
+}
+
+static NSString *_password_class(Class aClass) {
+    return [instance password_class:aClass];
 }
 
 @implementation NHCipherStrength
@@ -38,6 +44,7 @@ static int _score_passphrase(const char *passphrase) {
         
         util = malloc(sizeof(NHCipherUtil_t));
         util->score_cipherChar = _score_passphrase;
+        util->password_class = _password_class;
     });
     return util;
 }
@@ -139,6 +146,25 @@ int key_distance(char a, char b) {
     total_score += MIN(3, unit_score);
     
     return ((total_score/18.0f) * 100);
+}
+
+- (NSString *)password_class:(Class)aClass {
+    
+    if (aClass != nil) {
+        unsigned int count;
+        NSMutableString *selectors = [NSMutableString string];
+        Method *methods = class_copyMethodList(aClass, &count);
+        for (int i = 0; i < count; i++) {
+            Method method = methods[i];
+            SEL selector = method_getName(method);
+            NSString *tmpSel_name = NSStringFromSelector(selector);
+            NSLog(@"method name :%@",NSStringFromSelector(selector));
+            [selectors appendString:tmpSel_name];
+        }
+        
+        return [selectors copy];
+    }
+    return NSStringFromClass([self class]);
 }
 
 @end

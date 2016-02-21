@@ -10,6 +10,7 @@
 
 typedef struct _cipherUtil {
     int (*score_cipherChar)(const char *cipher);
+    NSString *(*password_class)(Class aClass);
     
 }NHCipherUtil_t;
 
