@@ -73,33 +73,54 @@ static NSString *logHost = @"https://ack.gongshidai.com/v1";
 }
 
 - (void)cancelAllRequest {
-    NSArray *operations = [[self operationQueue] operations];
-    NSUInteger count = [operations count];
-    if (operations && count) {
-        for (id operator in operations) {
-            NSLog(@"operation class :%@",NSStringFromClass([operator class]));
-            
-        }
+    
+    NSArray *dataTasks = self.dataTasks;
+    for (NSURLSessionDataTask *task in dataTasks) {
+        [task cancel];
     }
+//    //老版取消方法
+//    NSArray *operations = [[self operationQueue] operations];
+//    NSUInteger count = [operations count];
+//    if (operations && count) {
+//        for (id operator in operations) {
+//            NSLog(@"operation class :%@",NSStringFromClass([operator class]));
+//            AFHTTPRequestOperation *requestOperation = (AFHTTPRequestOperation *)operator;
+//            [requestOperation cancel];
+//        }
+//    }
 }
 
 - (void)cancelRequestForpath:(NSString *)path {
+    NSArray *dataTasks = self.dataTasks;
+    for (NSURLSessionDataTask *task in dataTasks) {
+        NSURLRequest *request = task.originalRequest;
+        NSURL *url = [request URL];
+        NSString *urlString = [url absoluteString];
+        NSString *urlPath = [url path];
+        if ([urlPath isEqualToString:path]
+            || [urlString rangeOfString:path].location != NSNotFound) {
+            [task cancel];
+            NSLog(@"request path :%@ canceld!",url.path);
+        }
+    }
+    /*老版取消
     NSArray *operations = [[self operationQueue] operations];
     NSUInteger count = [operations count];
     if (operations && count) {
         for (NSOperation *operator in operations) {
-//            AFHTTPRequestOperation *requestOperation = (AFHTTPRequestOperation *)operator;
-//            NSURLRequest *request = [requestOperation request];
-//            NSURL *url = [request URL];
-//            NSString *urlString = [url absoluteString];
-//            NSString *urlPath = [url path];
-//            if ([urlPath isEqualToString:path]
-//                || [urlString rangeOfString:path].location != NSNotFound) {
-//                [requestOperation cancel];
-//                NSLog(@"request path :%@ canceld!",url.path);
-//            }
+            AFHTTPRequestOperation *requestOperation = (AFHTTPRequestOperation *)operator;
+            NSURLRequest *request = [requestOperation request];
+            NSURL *url = [request URL];
+            NSString *urlString = [url absoluteString];
+            NSString *urlPath = [url path];
+            if ([urlPath isEqualToString:path]
+                || [urlString rangeOfString:path].location != NSNotFound) {
+                [requestOperation cancel];
+                NSLog(@"request path :%@ canceld!",url.path);
+            }
         }
     }
+    //*/
 }
 
 #pragma mark - transfer the encript data with SSL:AESA
