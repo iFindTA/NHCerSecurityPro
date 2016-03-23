@@ -197,8 +197,6 @@ ssl_prefer_server_ciphers on;
 代码较长，详见示例
 ```
 
-[test](#user-content-from1)
-
 ###### *Attentions
 ```
 1.设置完ATS后，在设置AFSecurityPolicy时要将ValidatesDomainName属性设置为false，否则验证失败
