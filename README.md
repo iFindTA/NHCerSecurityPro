@@ -97,15 +97,16 @@ pod 'AFNetworking'
 #####<h4 style="color:#4B8CF9" id="user-content-sep2">数据层SSL En/Decrypt:</h4>
 工具包在PROJECT_DIR->同名文件夹->Security,实现加密方法：
 ```
-1.AES加解密
-2.RSA加解密
-3.RSA签名、验签
-4.AES随机秘钥生成
+1.AES随机秘钥生成
+2.AES加解密
+3.RSA加解密
+4.RSA签名、验签
 ```
 ##### <h4 style="color:#4B8CF9" id="user-content-sep3">AF与nginx双向认证介绍:</h4>
 由于我们CA购买时仅支持单向认证，所以不再介绍单向认证，这里以自签名（self－signed）Certificate为例说明（原理不再介绍 网上很多）
 ###### *准备证书
 1.生成CA私钥和自签名证书
+
 ->step 1>准备
 ```
 > cd/etc/pki/CA  
@@ -125,6 +126,7 @@ pod 'AFNetworking'
 > openssl x509 -in cacert.pem -outform DER -out ca.cer  
 ```
 2.生成服务器私钥和证书
+
 ->step 1>找到一个合适存放私钥的目录文件夹
 ```
 > cd/home/ssl/server 
@@ -143,6 +145,7 @@ pod 'AFNetworking'
 > openssl x509 -in server-cert.pem -outform DER -out server.cer
 ```
 3.生成客户端私钥和证书
+
 ->step 1>找到一个合适存放客户端私钥的目录文件夹
 ```
 > cd/home/ssl/client 
@@ -180,6 +183,7 @@ ssl_prefer_server_ciphers on;
 ```
 ###### *客户端（iOS）相关配置
 1.工程配置及资源
+
 ->step 1>info.pist配置（iOS9.x+）
 ```
 因为是自签名证书。所以需要设置ATS（APP Transition Security），相关设置自行解决
