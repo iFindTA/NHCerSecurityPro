@@ -1,19 +1,17 @@
 # NHCerSecurityPro
 
 * * *
-#### 文章目录：
-<A HREF="#ROP_AR1">AF推荐使用方法</A>
-
-<A HREF="#ROP_AR2">数据层SSL En/Decrypt</A>
-
-<A HREF="#ROP_AR3">AF与nginx双向认证介绍</A>
+#### 目录：
+[AF推荐使用方法](#user-content-sep1)
+[数据层SSL EN/Decrypt](#user-content-sep2)
+[AF与nginx双向认证介绍](#user-content-sep3)
 
 * * *
 
 
 #### 正文:
 
-##### [AF推荐使用方法:](#Anchor)
+#####<h4 style="color:blue" id="user-content-sep1">AF推荐使用方法:</h4>
 ###### *引入AFNetworking
 推荐使用Pod导入，方便库管理
 ```ObjectiveC
@@ -94,7 +92,7 @@ pod 'AFNetworking'
 ```
 其他用法方法详见例子
 
-##### [数据层SSL En/Decrypt:](#Anchor)
+#####<h4 style="color:blue" id="user-content-sep2">数据层SSL En/Decrypt:</h4>
 工具包在PROJECT_DIR->同名文件夹->Security,实现加密方法：
 ```
 1.AES加解密
@@ -102,7 +100,7 @@ pod 'AFNetworking'
 3.RSA签名、验签
 4.AES随机秘钥生成
 ```
-##### [AF与nginx双向认证介绍:](#Anchor)
+##### <h4 style="color:blue" id="user-content-sep3">AF与nginx双向认证介绍:</h4>
 由于我们CA购买时仅支持单向认证，所以不再介绍单向认证，这里以自签名（self－signed）Certificate为例说明（原理不再介绍 网上很多）
 ###### *准备证书
 1.生成CA私钥和自签名证书
@@ -192,6 +190,9 @@ ssl_prefer_server_ciphers on;
 ```
 代码较长，详见示例
 ```
+
+[test](#user-content-from1)
+
 ###### *Attentions
 ```
 1.设置完ATS后，在设置AFSecurityPolicy时要将ValidatesDomainName属性设置为false，否则验证失败
