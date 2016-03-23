@@ -207,7 +207,7 @@ ssl_prefer_server_ciphers on;
 UIWebView的https请求
 ```
 * * *
-###### *Contacter
+###### *Feedback
 ```
 nanhujiaju@gmail.com
 ```
