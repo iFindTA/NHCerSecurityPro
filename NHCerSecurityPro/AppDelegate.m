@@ -8,10 +8,9 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "NHWebSSLVCR.h"
 
 @interface AppDelegate ()
-
-@property (nonatomic, strong)ViewController *viewController;
 
 @end
 
@@ -20,11 +19,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    self.viewController = [[ViewController alloc] init];
-    UINavigationController *t_navi = [[UINavigationController alloc] initWithRootViewController:self.viewController];
+    ViewController *native = [[ViewController alloc] init];
+    UINavigationController *t_navi = [[UINavigationController alloc] initWithRootViewController:native];
+    t_navi.tabBarItem.title = @"Native";
+    NHWebSSLVCR *web = [[NHWebSSLVCR alloc] init];
+    UINavigationController *webNavi = [[UINavigationController alloc] initWithRootViewController:web];
+    webNavi.tabBarItem.title = @"Web";
+    UITabBarController *tabVCR = [[UITabBarController alloc] init];
+    tabVCR.viewControllers = @[t_navi,webNavi];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = t_navi;
+    self.window.rootViewController = tabVCR;
     [self.window makeKeyAndVisible];
     return YES;
 }

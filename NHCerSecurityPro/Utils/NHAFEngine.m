@@ -17,8 +17,12 @@
 @property (nonatomic, strong) NSString *token;
 @end
 static NHAFEngine *instance = nil;
+static float requestTimeOut = 60.f;
 static NSString *domain  = @"www.baidu.com";
-static NSString *logHost = @"https://ack.gongshidai.com/v1";
+static NSString *logHost = @"https://am.yewind.com";
+static NSString *server = @"server";
+static NSString *p12file = @"client";
+static NSString *p12pwd = @"haha";
 @implementation NHAFEngine
 
 + (NHAFEngine *)share{
@@ -29,24 +33,79 @@ static NSString *logHost = @"https://ack.gongshidai.com/v1";
             //set request serializer
             //AFJSONRequestSerializer *request_serial = [AFJSONRequestSerializer serializer];
             AFHTTPRequestSerializer *request_serial = [AFHTTPRequestSerializer serializer];
-            request_serial.timeoutInterval = 60.f;
-            [request_serial setValue:@"iphone" forHTTPHeaderField:@"CLIENT"];
-            [request_serial setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+            request_serial.timeoutInterval = requestTimeOut;
+            //[request_serial setValue:@"iphone" forHTTPHeaderField:@"CLIENT"];
+            [request_serial setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             //multipart/form-data
             //[request_serial setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
-            [request_serial setValue:@"34c6093fe8dbe71f54740f46748aa137e78a5cfb" forHTTPHeaderField:@"Bear"];
+            //[request_serial setValue:@"34c6093fe8dbe71f54740f46748aa137e78a5cfb" forHTTPHeaderField:@"Bear"];
             instance.requestSerializer = request_serial;
             //set response serializer
             AFJSONResponseSerializer *response_serail = [AFJSONResponseSerializer serializer];
-//            response_serail.acceptableContentTypes = [response_serail.acceptableContentTypes setByAddingObject:@"text/html"];
+            response_serail.acceptableContentTypes = [response_serail.acceptableContentTypes setByAddingObject:@"text/html"];
             instance.responseSerializer = response_serail;
+            
+            //客户端认证 需要p12文件
+            //*
+            [instance setSessionDidReceiveAuthenticationChallengeBlock:^NSURLSessionAuthChallengeDisposition(NSURLSession * _Nonnull session, NSURLAuthenticationChallenge * _Nonnull challenge, NSURLCredential *__autoreleasing  _Nullable * _Nullable credential) {
+                NSLog(@"----received challenge----");
+                NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengePerformDefaultHandling;
+                __autoreleasing NSURLCredential *__credential = nil;
+                if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
+                    NSLog(@"----server verify client----");
+                    if ([instance.securityPolicy evaluateServerTrust:challenge.protectionSpace.serverTrust forDomain:challenge.protectionSpace.host]) {
+                        __credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+                        if (__credential) {
+                            disposition = NSURLSessionAuthChallengeUseCredential;
+                        }else{
+                            disposition = NSURLSessionAuthChallengePerformDefaultHandling;
+                        }
+                    }else{
+                        disposition = NSURLSessionAuthChallengeCancelAuthenticationChallenge;
+                    }
+                }else{
+                    //client authentication
+                    NSLog(@"----client verify server----");
+                    SecIdentityRef identity = NULL;
+                    SecTrustRef trust = NULL;
+                    NSString *p12 = [[NSBundle mainBundle] pathForResource:p12file ofType:@"p12"];
+                    NSFileManager *fileManager = [NSFileManager defaultManager];
+                    if (![fileManager fileExistsAtPath:p12]) {
+                        NSLog(@"%@.p12 file not exist!",p12file);
+                    }else{
+                        NSData *pkcs12Data = [NSData dataWithContentsOfFile:p12];
+                        //__strong typeof([NHAFEngine class]) strongSelf = weakSelf;
+                        if ([NHAFEngine extractIdentity:&identity andTrust:&trust fromPKCS12Data:pkcs12Data]) {
+                            SecCertificateRef certificate = NULL;
+                            SecIdentityCopyCertificate(identity, &certificate);
+                            const void *certs[] = {certificate};
+                            CFArrayRef certArray = CFArrayCreate(kCFAllocatorDefault, certs, 1, NULL);
+                            __credential = [NSURLCredential credentialWithIdentity:identity certificates:(__bridge NSArray *)certArray persistence:NSURLCredentialPersistencePermanent];
+                            disposition = NSURLSessionAuthChallengeUseCredential;
+                        }
+                    }
+                }
+                *credential = __credential;
+                return disposition;
+            }];
+            //*/
+            
             //set security policy
-            NSString *cerFilePath = [[NSBundle mainBundle] pathForResource:@"cert" ofType:@"der"];
-            NSData *CAData = [NSData dataWithContentsOfFile:cerFilePath];
-            AFSecurityPolicy *t_policy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
-            [t_policy setAllowInvalidCertificates:true];
-            [t_policy setValidatesDomainName:false];
-            [t_policy setPinnedCertificates:[NSSet setWithObjects:CAData, nil]];
+            AFSecurityPolicy *t_policy;
+            NSString *cerFilePath = [[NSBundle mainBundle] pathForResource:server ofType:@"cer"];
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            if ([fileManager fileExistsAtPath:cerFilePath]) {
+                NSData *CAData = [NSData dataWithContentsOfFile:cerFilePath];
+                t_policy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
+                [t_policy setAllowInvalidCertificates:true];
+                [t_policy setValidatesDomainName:false];
+                [t_policy setPinnedCertificates:[NSSet setWithObjects:CAData, nil]];
+                NSLog(@"security policy certificate");
+            }else{
+                AFSecurityPolicy *t_policy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+                [t_policy setAllowInvalidCertificates:true];
+                [t_policy setValidatesDomainName:false];
+            }
             instance.securityPolicy = t_policy;
         }
     });
@@ -121,6 +180,30 @@ static NSString *logHost = @"https://ack.gongshidai.com/v1";
         }
     }
     //*/
+}
+
+#pragma mark - Mutual Authentication --
+
++ (BOOL)extractIdentity:(SecIdentityRef *)outIdentity andTrust:(SecTrustRef *)outTrust fromPKCS12Data:(NSData *)inPKCS12Data {
+    
+    OSStatus securityErr = errSecSuccess;
+    //client certificate password
+    NSDictionary *optionsDic = [NSDictionary dictionaryWithObject:p12pwd forKey:(__bridge id)kSecImportExportPassphrase];
+    CFArrayRef items = CFArrayCreate(NULL, 0, 0, NULL);
+    securityErr = SecPKCS12Import((__bridge CFDataRef)inPKCS12Data, (__bridge CFDictionaryRef)optionsDic, &items);
+    if (securityErr == errSecSuccess) {
+        CFDictionaryRef mineIdentAndTrust = CFArrayGetValueAtIndex(items, 0);
+        const void *tmpIdentity = NULL;
+        tmpIdentity = CFDictionaryGetValue(mineIdentAndTrust, kSecImportItemIdentity);
+        *outIdentity = (SecIdentityRef)tmpIdentity;
+        const void *tmpTrust = NULL;
+        tmpTrust = CFDictionaryGetValue(mineIdentAndTrust, kSecImportItemTrust);
+        *outTrust = (SecTrustRef)tmpTrust;
+    }else{
+        NSLog(@"failed to extract identity/trust with err code :%d",securityErr);
+        return false;
+    }
+    return true;
 }
 
 #pragma mark - transfer the encript data with SSL:AESA

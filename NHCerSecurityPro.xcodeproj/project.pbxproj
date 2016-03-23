@@ -17,8 +17,6 @@
 		60A670571B69C5AD00FBAC2A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60A670551B69C5AD00FBAC2A /* LaunchScreen.xib */; };
 		60A670631B69C5AE00FBAC2A /* NHCerSecurityProTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A670621B69C5AE00FBAC2A /* NHCerSecurityProTests.m */; };
 		60A6706F1B69C79500FBAC2A /* NHAFEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A6706E1B69C79500FBAC2A /* NHAFEngine.m */; };
-		60A670711B69C89300FBAC2A /* cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 60A670701B69C89300FBAC2A /* cert.der */; };
-		60A670721B69C89300FBAC2A /* cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 60A670701B69C89300FBAC2A /* cert.der */; };
 		60A6707C1B69CCA500FBAC2A /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A670761B69CCA500FBAC2A /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		60A6707D1B69CCA500FBAC2A /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A670761B69CCA500FBAC2A /* GTMBase64.m */; };
 		60A6707E1B69CCA500FBAC2A /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 60A670781B69CCA500FBAC2A /* README.md */; };
@@ -35,6 +33,9 @@
 		60A670921B6A012B00FBAC2A /* t_default_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A670891B6A012B00FBAC2A /* t_default_icon@2x.png */; };
 		60A670931B6A012B00FBAC2A /* t_splash_down_flag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A6708A1B6A012B00FBAC2A /* t_splash_down_flag@2x.png */; };
 		60A670941B6A012B00FBAC2A /* t_splash_down_flag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A6708A1B6A012B00FBAC2A /* t_splash_down_flag@2x.png */; };
+		60E95F171CA117FD00EB2194 /* NHWebSSLVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E95F161CA117FD00EB2194 /* NHWebSSLVCR.m */; };
+		60E95F1A1CA11E8E00EB2194 /* client.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 60E95F181CA11E8E00EB2194 /* client.p12 */; };
+		60E95F1F1CA140F200EB2194 /* server.cer in Resources */ = {isa = PBXBuildFile; fileRef = 60E95F1E1CA140F200EB2194 /* server.cer */; };
 		8E1D25B8E5B0E77930EB5B92 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0582B1833B1264BD71518249 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +70,6 @@
 		60A670621B69C5AE00FBAC2A /* NHCerSecurityProTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NHCerSecurityProTests.m; sourceTree = "<group>"; };
 		60A6706D1B69C79500FBAC2A /* NHAFEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHAFEngine.h; sourceTree = "<group>"; };
 		60A6706E1B69C79500FBAC2A /* NHAFEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHAFEngine.m; sourceTree = "<group>"; };
-		60A670701B69C89300FBAC2A /* cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = cert.der; sourceTree = "<group>"; };
 		60A670751B69CCA500FBAC2A /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		60A670761B69CCA500FBAC2A /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		60A670771B69CCA500FBAC2A /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -81,6 +81,10 @@
 		60A670891B6A012B00FBAC2A /* t_default_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "t_default_icon@2x.png"; sourceTree = "<group>"; };
 		60A6708A1B6A012B00FBAC2A /* t_splash_down_flag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "t_splash_down_flag@2x.png"; sourceTree = "<group>"; };
 		60CE40291BA17BF500F9767C /* NHCerSecurity-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NHCerSecurity-Prefix.pch"; sourceTree = "<group>"; };
+		60E95F151CA117FD00EB2194 /* NHWebSSLVCR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHWebSSLVCR.h; sourceTree = "<group>"; };
+		60E95F161CA117FD00EB2194 /* NHWebSSLVCR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHWebSSLVCR.m; sourceTree = "<group>"; };
+		60E95F181CA11E8E00EB2194 /* client.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = client.p12; sourceTree = "<group>"; };
+		60E95F1E1CA140F200EB2194 /* server.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = server.cer; sourceTree = "<group>"; };
 		9EE1E24181CBC2EA257FC3BA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CA1F90EF419651725295E4B8 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +147,8 @@
 				60A6704B1B69C5AD00FBAC2A /* AppDelegate.m */,
 				60A6704D1B69C5AD00FBAC2A /* ViewController.h */,
 				60A6704E1B69C5AD00FBAC2A /* ViewController.m */,
+				60E95F151CA117FD00EB2194 /* NHWebSSLVCR.h */,
+				60E95F161CA117FD00EB2194 /* NHWebSSLVCR.m */,
 				60A670501B69C5AD00FBAC2A /* Main.storyboard */,
 				60A670531B69C5AD00FBAC2A /* Images.xcassets */,
 				60A670551B69C5AD00FBAC2A /* LaunchScreen.xib */,
@@ -181,7 +187,8 @@
 		60A6706C1B69C77900FBAC2A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				60A670701B69C89300FBAC2A /* cert.der */,
+				60E95F181CA11E8E00EB2194 /* client.p12 */,
+				60E95F1E1CA140F200EB2194 /* server.cer */,
 				60A6706D1B69C79500FBAC2A /* NHAFEngine.h */,
 				60A6706E1B69C79500FBAC2A /* NHAFEngine.m */,
 				609ADF731C769DE20039C176 /* NHCipherStrength.h */,
@@ -328,8 +335,9 @@
 				60A670911B6A012B00FBAC2A /* t_default_icon@2x.png in Resources */,
 				60A670521B69C5AD00FBAC2A /* Main.storyboard in Resources */,
 				60A670571B69C5AD00FBAC2A /* LaunchScreen.xib in Resources */,
+				60E95F1A1CA11E8E00EB2194 /* client.p12 in Resources */,
+				60E95F1F1CA140F200EB2194 /* server.cer in Resources */,
 				60A670541B69C5AD00FBAC2A /* Images.xcassets in Resources */,
-				60A670711B69C89300FBAC2A /* cert.der in Resources */,
 				60A670931B6A012B00FBAC2A /* t_splash_down_flag@2x.png in Resources */,
 				60A6708D1B6A012B00FBAC2A /* Default.png in Resources */,
 				60A670821B69CCA500FBAC2A /* public_key.der in Resources */,
@@ -342,7 +350,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				60A670831B69CCA500FBAC2A /* public_key.der in Resources */,
-				60A670721B69C89300FBAC2A /* cert.der in Resources */,
 				60A670901B6A012B00FBAC2A /* Default@2x.png in Resources */,
 				60A6708C1B6A012B00FBAC2A /* Default-568h@2x.png in Resources */,
 				60A670921B6A012B00FBAC2A /* t_default_icon@2x.png in Resources */,
@@ -407,6 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60A6707E1B69CCA500FBAC2A /* README.md in Sources */,
+				60E95F171CA117FD00EB2194 /* NHWebSSLVCR.m in Sources */,
 				60A6704F1B69C5AD00FBAC2A /* ViewController.m in Sources */,
 				60A6704C1B69C5AD00FBAC2A /* AppDelegate.m in Sources */,
 				60A6707C1B69CCA500FBAC2A /* GTMBase64.m in Sources */,

@@ -38,6 +38,8 @@
     
     self.title = @"Net Security Pro";
     
+    self.tabBarItem.title = @"Native";
+    
     _sources = [[NSMutableArray alloc] initWithCapacity:0];
     NHItem *item = [[NHItem alloc] init];
     item.method = @"GET";
@@ -54,6 +56,10 @@
     item = [[NHItem alloc] init];
     item.method = @"Upload";
     item.info = @"index/testupload";
+    [_sources addObject:item];
+    item = [[NHItem alloc] init];
+    item.method = @"Mutual Athor";
+    item.info = @"/aa.php";
     [_sources addObject:item];
     
     CGRect infoRect = self.view.bounds;
@@ -77,8 +83,8 @@
     
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
     
-    NSString *info = NHCipherUtil->password_class([self class]);
-    NSLog(@"info:%@",info);
+//    NSString *info = NHCipherUtil->password_class([self class]);
+//    NSLog(@"info:%@",info);
 }
 
 #pragma mark - tableView data&delegate
@@ -186,10 +192,30 @@
         }];
         
         password = @"410626nanhujiaju";
+    }else if ([item.method isEqualToString:@"Mutual Athor"]){
+        [[NHAFEngine share] POST:item.info parameters:params vcr:self view:nil success:^(NSURLSessionDataTask *task, id responseObj) {
+            NSString *ret = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:responseObj options:NSJSONReadingMutableLeaves|NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
+            //[SVProgressHUD showSuccessWithStatus:ret];
+            
+            NSLog(@"ret:%@",ret);
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            NSLog(@"error occured:%@",error.localizedDescription);
+            //[SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        }];
+        
+//        [params setObject:@"13023622337" forKey:@"phone"];
+//        [[NHAFEngine share] GET:item.info parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+//            NSLog(@"responseObject:%@",responseObject);
+//            NSString *ret = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONReadingMutableLeaves|NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
+//            [SVProgressHUD showSuccessWithStatus:ret];
+//        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//            NSLog(@"error occured:%@",error.localizedDescription);
+//            [SVProgressHUD dismiss];
+//        }];
     }
     
-    int score = NHCipherUtil->score_cipherChar([password UTF8String]);
-    NSLog(@"score:%zd",score);
+    //int score = NHCipherUtil->score_cipherChar([password UTF8String]);
+    //NSLog(@"score:%zd",score);
 }
 
 - (void)didReceiveMemoryWarning {
