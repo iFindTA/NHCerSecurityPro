@@ -6,7 +6,6 @@
 //  Copyright (c) 2015年 hu jiaju. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
 
 @interface NHAFEngine : AFHTTPSessionManager

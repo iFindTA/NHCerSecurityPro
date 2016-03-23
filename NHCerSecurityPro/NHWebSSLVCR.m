@@ -29,7 +29,7 @@
     _tfd = [[UITextField alloc] initWithFrame:bounds];
     _tfd.borderStyle = UITextBorderStyleBezel;
     _tfd.placeholder = @"input a url that start with 'https'";
-    _tfd.text = @"https://m.youtuker.com/";
+    _tfd.text = @"https://am.yewind.com/aa.php";
     [self.view addSubview:_tfd];
     
     bounds = CGRectMake(220, 70, 50, 30);
@@ -58,8 +58,9 @@
     
     NSString *tmp = [request.URL absoluteString];
     NSLog(@"request url :%@",tmp);
+    NSString *url=[[request URL]absoluteString];
     
-    return true;
+    return YES;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
