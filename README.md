@@ -8,6 +8,8 @@
 
 [AF与nginx双向认证介绍](#user-content-sep3)
 
+[UIWebView双向认证介绍](#user-content-sep4)
+
 * * *
 
 
@@ -202,9 +204,15 @@ ssl_prefer_server_ciphers on;
 1.设置完ATS后，在设置AFSecurityPolicy时要将ValidatesDomainName属性设置为false，否则验证失败
 ```
 * * *
-###### *To Be Continue
+##### <h4 style="color:#4B8CF9" id="user-content-sep4">UIWebView双向认证介绍:</h4>
+###### UIWebView控件不会自动处理认证，所以需要手动处理，你有两个选择：
+1.iOS7及之前：
 ```
-UIWebView的https请求
+可以子类化NSURLProtocol，在这里处理证书认证问题
+```
+2.iOS8.0+及之后
+```
+iOS8.0之后UIWebView不再自动捕获Protocol，所以可以通过NSURLSession或NSURLConnection进行手动处理（依各人喜好），详见示例
 ```
 * * *
 ###### *Feedback
