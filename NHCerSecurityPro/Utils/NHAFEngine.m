@@ -4,7 +4,7 @@
 //
 //  Created by hu jiaju on 15/7/30.
 //  Copyright (c) 2015年 hu jiaju. All rights reserved.
-//
+//  nanhujiaju@gmail.com---https://github.com/iFindTA
 
 #import "NHAFEngine.h"
 #import "NHSSLCImpPro.h"
@@ -38,7 +38,7 @@ static NSString *p12pwd = @"haha";
             [request_serial setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             //multipart/form-data
             //[request_serial setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
-            //[request_serial setValue:@"34c6093fe8dbe71f54740f46748aa137e78a5cfb" forHTTPHeaderField:@"Bear"];
+            
             instance.requestSerializer = request_serial;
             //set response serializer
             AFJSONResponseSerializer *response_serail = [AFJSONResponseSerializer serializer];

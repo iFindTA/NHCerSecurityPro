@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		609569DC1B82E2E0004CD76B /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 609569DB1B82E2E0004CD76B /* libssl.a */; };
-		609ADF751C769DE20039C176 /* NHCipherStrength.m in Sources */ = {isa = PBXBuildFile; fileRef = 609ADF741C769DE20039C176 /* NHCipherStrength.m */; };
 		60A670491B69C5AD00FBAC2A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A670481B69C5AD00FBAC2A /* main.m */; };
 		60A6704C1B69C5AD00FBAC2A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A6704B1B69C5AD00FBAC2A /* AppDelegate.m */; };
 		60A6704F1B69C5AD00FBAC2A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A6704E1B69C5AD00FBAC2A /* ViewController.m */; };
@@ -33,6 +32,7 @@
 		60A670921B6A012B00FBAC2A /* t_default_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A670891B6A012B00FBAC2A /* t_default_icon@2x.png */; };
 		60A670931B6A012B00FBAC2A /* t_splash_down_flag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A6708A1B6A012B00FBAC2A /* t_splash_down_flag@2x.png */; };
 		60A670941B6A012B00FBAC2A /* t_splash_down_flag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A6708A1B6A012B00FBAC2A /* t_splash_down_flag@2x.png */; };
+		60C710FB1CA3D2E5001A1F7B /* NHCipherStrength.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C710FA1CA3D2E5001A1F7B /* NHCipherStrength.m */; };
 		60E95F171CA117FD00EB2194 /* NHWebSSLVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E95F161CA117FD00EB2194 /* NHWebSSLVCR.m */; };
 		60E95F1A1CA11E8E00EB2194 /* client.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 60E95F181CA11E8E00EB2194 /* client.p12 */; };
 		60E95F1F1CA140F200EB2194 /* server.cer in Resources */ = {isa = PBXBuildFile; fileRef = 60E95F1E1CA140F200EB2194 /* server.cer */; };
@@ -53,8 +53,6 @@
 		0582B1833B1264BD71518249 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		609569D91B82DEC0004CD76B /* NHSSLCImpPro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHSSLCImpPro.h; sourceTree = "<group>"; };
 		609569DB1B82E2E0004CD76B /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
-		609ADF731C769DE20039C176 /* NHCipherStrength.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHCipherStrength.h; sourceTree = "<group>"; };
-		609ADF741C769DE20039C176 /* NHCipherStrength.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHCipherStrength.m; sourceTree = "<group>"; };
 		60A670431B69C5AD00FBAC2A /* NHCerSecurityPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NHCerSecurityPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60A670471B69C5AD00FBAC2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60A670481B69C5AD00FBAC2A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -80,6 +78,8 @@
 		60A670881B6A012B00FBAC2A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		60A670891B6A012B00FBAC2A /* t_default_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "t_default_icon@2x.png"; sourceTree = "<group>"; };
 		60A6708A1B6A012B00FBAC2A /* t_splash_down_flag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "t_splash_down_flag@2x.png"; sourceTree = "<group>"; };
+		60C710F91CA3D2E5001A1F7B /* NHCipherStrength.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHCipherStrength.h; sourceTree = "<group>"; };
+		60C710FA1CA3D2E5001A1F7B /* NHCipherStrength.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHCipherStrength.m; sourceTree = "<group>"; };
 		60CE40291BA17BF500F9767C /* NHCerSecurity-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NHCerSecurity-Prefix.pch"; sourceTree = "<group>"; };
 		60E95F151CA117FD00EB2194 /* NHWebSSLVCR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHWebSSLVCR.h; sourceTree = "<group>"; };
 		60E95F161CA117FD00EB2194 /* NHWebSSLVCR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHWebSSLVCR.m; sourceTree = "<group>"; };
@@ -191,8 +191,6 @@
 				60E95F1E1CA140F200EB2194 /* server.cer */,
 				60A6706D1B69C79500FBAC2A /* NHAFEngine.h */,
 				60A6706E1B69C79500FBAC2A /* NHAFEngine.m */,
-				609ADF731C769DE20039C176 /* NHCipherStrength.h */,
-				609ADF741C769DE20039C176 /* NHCipherStrength.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -200,6 +198,8 @@
 		60A670731B69CCA500FBAC2A /* Security */ = {
 			isa = PBXGroup;
 			children = (
+				60C710F91CA3D2E5001A1F7B /* NHCipherStrength.h */,
+				60C710FA1CA3D2E5001A1F7B /* NHCipherStrength.m */,
 				609569D91B82DEC0004CD76B /* NHSSLCImpPro.h */,
 				609569DB1B82E2E0004CD76B /* libssl.a */,
 				60A6707B1B69CCA500FBAC2A /* public_key.der */,
@@ -418,8 +418,8 @@
 				60A6704F1B69C5AD00FBAC2A /* ViewController.m in Sources */,
 				60A6704C1B69C5AD00FBAC2A /* AppDelegate.m in Sources */,
 				60A6707C1B69CCA500FBAC2A /* GTMBase64.m in Sources */,
+				60C710FB1CA3D2E5001A1F7B /* NHCipherStrength.m in Sources */,
 				60A6706F1B69C79500FBAC2A /* NHAFEngine.m in Sources */,
-				609ADF751C769DE20039C176 /* NHCipherStrength.m in Sources */,
 				60A670491B69C5AD00FBAC2A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

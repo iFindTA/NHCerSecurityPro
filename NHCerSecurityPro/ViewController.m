@@ -4,7 +4,7 @@
 //
 //  Created by hu jiaju on 15/7/30.
 //  Copyright (c) 2015年 hu jiaju. All rights reserved.
-//
+//  nanhujiaju@gmail.com---https://github.com/iFindTA
 
 #import "ViewController.h"
 #import "NHAFEngine.h"
@@ -71,20 +71,9 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
-    /**
-     *login info {
-     code = 0;
-     msg = "";
-     time = 1438232849;
-     token = "38BF49DC-D6FC-7D2E-61EA-AA2CC0C7B3AF";
-     "token_id" = 168;
-     }
-     */
     
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
     
-//    NSString *info = NHCipherUtil->password_class([self class]);
-//    NSLog(@"info:%@",info);
 }
 
 #pragma mark - tableView data&delegate
@@ -132,7 +121,7 @@
     //[SVProgressHUD showWithStatus:@"请稍后..."];
     NHItem *item = [_sources objectAtIndex:indexPath.row];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:@"15958199883" forKey:@"phone"];
+    [params setObject:@"1595819xxxx" forKey:@"phone"];
     [params setObject:@"123456" forKey:@"pwd"];
     NSString *password ;
     if ([item.method isEqualToString:@"GET"]) {

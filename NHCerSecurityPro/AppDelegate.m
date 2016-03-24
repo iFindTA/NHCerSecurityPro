@@ -4,7 +4,7 @@
 //
 //  Created by hu jiaju on 15/7/30.
 //  Copyright (c) 2015年 hu jiaju. All rights reserved.
-//
+//  nanhujiaju@gmail.com---https://github.com/iFindTA
 
 #import "AppDelegate.h"
 #import "ViewController.h"
